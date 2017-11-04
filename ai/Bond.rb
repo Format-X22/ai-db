@@ -1,0 +1,3 @@
+class Bond
+	#
+end

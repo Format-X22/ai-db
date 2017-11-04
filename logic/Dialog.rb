@@ -3,6 +3,7 @@ class Dialog
 	def initialize
 		@dictionary = Dictionary.new
 		@snap = Snap.new
+		@wit = Wit.new
 
 		@snap.load_ai
 
@@ -20,7 +21,7 @@ class Dialog
 		if action[0] == '#'
 			run action[1..-1]
 		else
-			# do ai action
+			@wit.handle action
 		end
 	end
 
@@ -41,13 +42,13 @@ class Dialog
 	end
 
 	def clear_context
-		# ai clear context
+		@wit.clear_context
 
 		log 'Context is clear'
 	end
 
 	def show_context
-		# current mind context
+		puts @wit.readable_context
 	end
 
 	def scan_word(word)
@@ -67,7 +68,7 @@ class Dialog
 			return
 		end
 
-		# pp node
+		pp @wit.mind(mean)
 	end
 
 	def save_ai
