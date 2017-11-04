@@ -33,7 +33,6 @@ class Dialog
 			when 'scan'    then scan_word arg
 			when 'inspect' then inspect_mind arg
 			when 'save'    then save_ai
-			when 'backup'  then backup_ai
 			when 'restore' then restore_ai
 			when 'exit'    then exit
 			when 'help'	   then print_help
@@ -77,12 +76,6 @@ class Dialog
 		log 'Success ai save'
 	end
 
-	def backup_ai
-		@snap.backup_ai
-
-		log 'Success backup'
-	end
-
 	def restore_ai
 		return unless sure? 'Delete all data and restore last backup?'
 
@@ -97,9 +90,8 @@ class Dialog
 		puts 'context = Show current mind context'
 		puts 'scan %word% = Scan word from dictionary'
 		puts 'inspect %mean% = Inspect mind with mean'
-		puts 'save = Save all minds and bonds data to database'
-		puts 'backup = Standard backup database'
-		puts 'restore = Delete all data, restore and load last database'
+		puts 'save = Save all minds and bonds to file'
+		puts 'restore = Delete all data, restore and load last file'
 		puts 'exit = Soft exit and stop program'
 		puts 'help = Print this text'
 		puts '==================='
