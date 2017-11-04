@@ -1,9 +1,9 @@
 class Dialog
 
-	def initialize
-		@dictionary = Dictionary.new
-		@snap = Snap.new
-		@wit = Wit.new
+	def initialize(wit, snap, dictionary)
+		@wit = wit
+		@snap = snap
+		@dictionary = dictionary
 
 		@snap.load_ai
 
@@ -35,7 +35,8 @@ class Dialog
 			when 'inspect' then inspect_mind arg
 			when 'save'    then save_ai
 			when 'restore' then restore_ai
-			when 'exit'    then exit
+			when 'exit'    then soft_exit
+			when 'halt'	   then exit
 			when 'help'	   then print_help
 			else err 'Unknown command'
 		end
@@ -85,6 +86,11 @@ class Dialog
 		log 'Success restore'
 	end
 
+	def soft_exit
+		save_ai
+		exit
+	end
+
 	def print_help
 		puts '==================='
 		puts 'clear = Clear current mind context'
@@ -93,7 +99,8 @@ class Dialog
 		puts 'inspect %mean% = Inspect mind with mean'
 		puts 'save = Save all minds and bonds to file'
 		puts 'restore = Delete all data, restore and load last file'
-		puts 'exit = Soft exit and stop program'
+		puts 'exit = Soft exit with save'
+		puts 'halt = Exit without save'
 		puts 'help = Print this text'
 		puts '==================='
 	end

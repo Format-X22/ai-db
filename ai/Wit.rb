@@ -16,4 +16,11 @@ class Wit
 		#
 	end
 
+	def index
+		#
+	end
+
+	def index=(val)
+		#
+	end
 end
